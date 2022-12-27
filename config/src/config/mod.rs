@@ -52,6 +52,10 @@ use aptos_crypto::{bls12381, ed25519::Ed25519PrivateKey, x25519};
 use aptos_types::account_address::AccountAddress;
 use poem_openapi::Enum as PoemEnum;
 
+//////// 0L ////////
+mod ol_upstream_config;
+pub use ol_upstream_config::*;
+
 /// Represents a deprecated config that provides no field verification.
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Eq, Serialize)]
 pub struct DeprecatedConfig {}
@@ -93,6 +97,8 @@ pub struct NodeConfig {
     pub storage: StorageConfig,
     #[serde(default)]
     pub test: Option<TestConfig>,
+    #[serde(default)]
+    pub upstream: UpstreamConfig, //////// 0L ////////
     #[serde(default)]
     pub validator_network: Option<NetworkConfig>,
     #[serde(default)]
