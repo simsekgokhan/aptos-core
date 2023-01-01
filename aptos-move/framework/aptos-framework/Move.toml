@@ -7,8 +7,9 @@ std = "0x1"
 aptos_std = "0x1"
 aptos_framework = "0x1"
 aptos_token = "0x3"
-core_resources = "0xA550C18"
+core_resources = "0x0" #//////// 0L ////////
 vm_reserved = "0x0"
+burn_address = "0x0" #//////// 0L ////////
 
 [dependencies]
 AptosStdlib = { local = "../aptos-stdlib" }

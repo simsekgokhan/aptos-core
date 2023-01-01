@@ -48,6 +48,19 @@ use tokio::time::Instant;
 pub use types::{deserialize_from_prefixed_hex_string, Account, Resource};
 use url::Url;
 
+//////// 0L ////////
+use crate::{
+    views::{OracleUpgradeStateView, TowerStateResourceView, TransactionView},
+};
+use diem_json_rpc_types::views::WaypointView;
+use diem_types::{
+    account_state_blob::AccountStateBlob,
+    account_state::AccountState,
+    transaction::Version,
+};
+use reqwest::Url;
+use std::convert::TryFrom;
+
 pub const USER_AGENT: &str = concat!("aptos-client-sdk-rust / ", env!("CARGO_PKG_VERSION"));
 pub const DEFAULT_VERSION_PATH_BASE: &str = "v1/";
 const DEFAULT_MAX_WAIT_MS: u64 = 60000;
@@ -915,6 +928,22 @@ impl Client {
         self.json(response).await
     }
 
+    // 0L todo: Not sure if it is possible to implement this fn with diem 1.3.0 code
+    /////// 0L /////////
+    /// Get all transactions for an account within a range
+    pub fn get_transactions_by_account_range(
+        &mut self,
+        account: AccountAddress,
+        start_height: u64,
+        num_txs_limit: u64,
+        fetch_events: bool
+    ) -> Result<Vec<TransactionView>> {
+      self
+        .get_account_transactions(account, start_height, num_txs_limit, fetch_events)
+        .map_err(Into::into)
+        .map(Response::into_inner)
+    }    
+
     pub async fn get_account_transactions_bcs(
         &self,
         address: AccountAddress,
@@ -1554,6 +1583,65 @@ impl Client {
             }
         }
     }
+
+    /////// 0L /////////
+    pub fn get_miner_state(&self, address: AccountAddress) 
+    -> Result<Response<Option<TowerStateResourceView>>> {
+        self.send(MethodRequest::get_miner_state(address))
+    }
+
+    /////// 0L /////////
+    pub fn get_oracle_upgrade_state(&self) 
+    -> Result<Response<Option<OracleUpgradeStateView>>> {
+        self.send(MethodRequest::get_oracle_upgrade_state())
+    }
+
+    /////// 0L /////////
+    pub fn get_waypoint(&self) 
+    -> Result<Response<Option<WaypointView>>> {
+        self.send(MethodRequest::get_waypoint_state())
+    }
+
+    /////// 0L /////////
+    pub fn url(&self) -> Url {
+        self.url.parse().unwrap()
+    }
+
+    /////// 0L /////////
+    pub fn get_account_state_blob(
+        &self,
+        account: &AccountAddress,
+    ) -> Result<(Option<AccountStateBlob>, Version)> {
+        let ret = self
+            .get_account_state_with_proof(*account, None, None)
+            .map(Response::into_inner)?;
+        if let Some(blob) = ret.blob {
+            Ok((Some(bcs::from_bytes(&blob).unwrap()), ret.version))
+        } else {
+            Ok((None, ret.version))
+        }
+    }
+
+    /////// 0L /////////
+    /// get any account state with client
+    pub fn get_account_state(
+        &self, address: AccountAddress
+    ) -> Result<AccountState, anyhow::Error> {
+        let (blob, _ver) = self.get_account_state_blob(&address)?;
+        if let Some(account_blob) = blob {
+            match AccountState::try_from(&account_blob) {
+                Ok(a) =>  Ok(a),
+                Err(e) => Err(
+                    anyhow::Error::msg(
+                        format!("could not fetch account state. Message: {:?}", e)
+                    )
+                ),
+            }
+            
+        } else {
+            Err(anyhow::Error::msg("connection to client"))
+        }
+    }    
 }
 
 pub fn retriable_with_404(status_code: StatusCode, aptos_error: Option<AptosError>) -> bool {

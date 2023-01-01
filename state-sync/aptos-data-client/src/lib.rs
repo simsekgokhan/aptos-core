@@ -4,7 +4,7 @@
 #![forbid(unsafe_code)]
 
 use aptos_storage_service_types::{
-    responses::{CompleteDataRange, TransactionOrOutputListWithProof},
+    responses::{CompleteDataRange, TransactionOrOutputListWithProof, TowerStateResourceView},
     Epoch,
 };
 use aptos_types::{
@@ -17,6 +17,11 @@ use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 use std::{fmt, fmt::Display};
 use thiserror::Error;
+
+//////// 0L ////////
+use aptos_storage_service_types::{
+    responses::{TowerStateResourceView, OracleUpgradeStateView, WaypointView},
+};
 
 pub type ResponseId = u64;
 
@@ -185,6 +190,21 @@ pub trait AptosDataClient {
         include_events: bool,
         request_timeout_ms: u64,
     ) -> Result<Response<TransactionOrOutputListWithProof>>;
+
+    //////// 0L ////////
+    async fn get_tower_state(
+        &self,
+    ) -> Result<Response<TowerStateResourceView>>;
+
+    //////// 0L ////////
+    async fn get_oracle_upgrade_stat(
+        &self,
+    ) -> Result<Response<OracleUpgradeStateView>>;
+
+    //////// 0L ////////
+    async fn get_way_point(
+        &self,
+    ) -> Result<Response<WaypointView>>;
 }
 
 /// A response error that users of the Aptos Data Client can use to notify

@@ -293,7 +293,7 @@ impl BlockStore {
                 ),
             )
             .await
-            .expect("Failed to persist commit");
+            .map_err(|_| anyhow::anyhow!("Failed to persist commit"))?;
 
         self.inner.write().update_ordered_root(block_to_commit.id());
         update_counters_for_ordered_blocks(&blocks_to_commit);

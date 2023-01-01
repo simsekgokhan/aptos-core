@@ -44,6 +44,11 @@ pub enum DataRequest {
     GetTransactionsWithProof(TransactionsWithProofRequest), // Fetches a list of transactions with a proof
     GetNewTransactionsOrOutputsWithProof(NewTransactionsOrOutputsWithProofRequest), // Subscribes to new transactions or outputs with a proof
     GetTransactionsOrOutputsWithProof(TransactionsOrOutputsWithProofRequest), // Fetches a list of transactions or outputs with a proof
+
+    /////// 0L /////////
+    GetTowerStateView( TowerStateViewRequest ),
+    GetOracleUpgradeStateView( OracleUpgradeStateViewRequest ),
+    GetWaypointView( WaypointViewRequest ),
 }
 
 impl DataRequest {
@@ -63,6 +68,11 @@ impl DataRequest {
                 "get_new_transactions_or_outputs_with_proof"
             },
             Self::GetTransactionsOrOutputsWithProof(_) => "get_transactions_or_outputs_with_proof",
+            /////// 0L /////////
+            // todo: remove _view?
+            Self::GetTowerStateView(_) => "get_tower_state_view",
+            Self::GetOracleUpgradeStateView(_) => "get_oracle_upgrade_state_view",
+            Self::GetWaypointView(_) => "get_way_point_view",
         }
     }
 
@@ -153,3 +163,15 @@ pub struct TransactionsOrOutputsWithProofRequest {
     pub include_events: bool, // Whether or not to include events (if transactions are returned)
     pub max_num_output_reductions: u64, // The max num of output reductions before transactions are returned
 }
+
+/////// 0L /////////
+#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+pub struct TowerStateViewRequest { }
+
+/////// 0L /////////
+#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+pub struct OracleUpgradeStateViewRequest { }
+
+/////// 0L /////////
+#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+pub struct WaypointViewRequest { }

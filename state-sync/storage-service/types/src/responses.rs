@@ -119,6 +119,93 @@ pub type TransactionOrOutputListWithProof = (
     Option<TransactionOutputListWithProof>,
 );
 
+//////// 0L ////////
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+pub struct TowerStateResourceView {
+    pub previous_proof_hash: BytesView,
+    pub verified_tower_height: u64, // user's latest verified_tower_height
+    pub latest_epoch_mining: u64,
+    pub count_proofs_in_epoch: u64,
+    pub epochs_validating_and_mining: u64,
+    pub contiguous_epochs_validating_and_mining: u64,
+    pub epochs_since_last_account_creation: u64,
+    // ADDED FIELDS FROM ORIGINAL MOVE STRUCT
+    // the actual count of proofs in epoch considering the lazy computation
+    pub actual_count_proofs_in_epoch: u64
+}
+
+impl TowerStateResourceView {
+  pub fn from_state_and_epoch(state: AccountState, this_epoch: u64) -> Result<TowerStateResourceView, Error>  {
+
+      let mut actual_count_proofs_in_epoch = 0;
+      if let Some(m) = state.get_miner_state()? {
+        if m.latest_epoch_mining == this_epoch {
+         actual_count_proofs_in_epoch =  m.count_proofs_in_epoch;
+        }
+
+        Ok(TowerStateResourceView {
+            previous_proof_hash: BytesView::from( m.previous_proof_hash),
+            verified_tower_height: m.verified_tower_height, // user's latest verified_tower_height
+            latest_epoch_mining: m.latest_epoch_mining,
+            count_proofs_in_epoch: m.count_proofs_in_epoch,
+            epochs_validating_and_mining: m.epochs_validating_and_mining,
+            contiguous_epochs_validating_and_mining: m.contiguous_epochs_validating_and_mining,
+            epochs_since_last_account_creation: m.epochs_since_last_account_creation,
+            // the proof count adjusted for lazy computation
+            actual_count_proofs_in_epoch,
+        })
+      } else {
+        bail!("could not get tower state")
+      }
+  }
+}
+
+//////// 0L ////////
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+pub struct OracleUpgradeStateView {
+    pub upgrade: UpgradeOracle,
+}
+
+impl TryFrom<OracleResource> for OracleUpgradeStateView {
+    type Error = Error;
+    fn try_from(state: OracleResource) -> Result<OracleUpgradeStateView, Self::Error> {
+      Ok(OracleUpgradeStateView {
+            upgrade: state.upgrade,
+        })
+    }
+}
+
+impl TryFrom<AccountState> for OracleUpgradeStateView {
+    type Error = Error;
+
+    fn try_from(state: AccountState) -> Result<OracleUpgradeStateView, Self::Error> {
+        if let Some(m) = state.get_oracle_state()? {
+          // TODO: duplication UpgradeResource is the same as OracleUpgradeStateView
+          Ok(OracleUpgradeStateView {
+              upgrade: m.upgrade,
+          })
+        } else {
+          Err(Error::msg("could not get upgrade oracle data"))
+        }
+
+    }
+}
+
+//////// 0L ////////
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+pub struct WaypointView {
+    pub waypoint: Waypoint,
+}
+
+impl TryFrom<Waypoint> for WaypointView {
+    type Error = Error;
+    fn try_from(w: Waypoint) -> Result<WaypointView, Self::Error> {
+      Ok(WaypointView {
+            waypoint: w,
+        })
+    }
+}
+
 /// A single data response.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[allow(clippy::large_enum_variant)]

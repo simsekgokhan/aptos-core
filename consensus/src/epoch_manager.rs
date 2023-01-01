@@ -597,11 +597,18 @@ impl EpochManager {
 
         let mut safety_rules =
             MetricsSafetyRules::new(self.safety_rules_manager.client(), self.storage.clone());
+        //////// 0L ////////
+        // Don't panic on initialize. We may be a validator trying to sync from a starting point.
+        // however this error if not solved, will cause a problem on the next epoch.
         if let Err(error) = safety_rules.perform_initialize() {
             error!(
                 epoch = epoch,
                 error = error,
-                "Unable to initialize safety rules.",
+                //////// 0L ////////
+                "Unable to initialize safety rules. \
+                 YOUR VALIDATOR WILL NOT BE ABLE TO SIGN BLOCKS but it will be \
+                 able to sync. This is likely a problem with the restore point \
+                 in your DB.",
             );
         }
 
@@ -992,7 +999,8 @@ impl EpochManager {
             ::futures::select! {
                 (peer, msg) = network_receivers.consensus_messages.select_next_some() => {
                     if let Err(e) = self.process_message(peer, msg).await {
-                        error!(epoch = self.epoch(), error = ?e, kind = error_kind(&e));
+                        /////// 0L /////////                        
+                        warn!(epoch = self.epoch(), error = ?e, kind = error_kind(&e));
                     }
                 },
                 (peer, msg) = network_receivers.quorum_store_messages.select_next_some() => {

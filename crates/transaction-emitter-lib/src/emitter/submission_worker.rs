@@ -127,6 +127,8 @@ impl SubmissionWorker {
 
             let txn_offset_time = Arc::new(AtomicU64::new(0));
 
+            dbg!(&num_requests); //////// 0L ////////
+
             join_all(
                 requests
                     .chunks(self.params.max_submit_batch_size)
