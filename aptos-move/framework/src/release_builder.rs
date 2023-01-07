@@ -31,9 +31,21 @@ pub struct ReleaseOptions {
     /// The path to the file where to place the release bundle.
     #[clap(long, default_value = "head.mrb", parse(from_os_str))]
     pub output: PathBuf,
+    //////// 0L ////////
+    /// .help("generate test/stdlib.mv for upgrade oracle")
+    #[clap(long = "create-upgrade-payload", default_value = true)]
+    pub create_upgrade_payload: bool,    
 }
 
 impl ReleaseOptions {
+    //////// 0L ////////
+    // TODO(0L): We need the files to end up in same package as the sources. 
+    // Otherwise the rust bindings don't get created correctly.
+    // When we try to change ouput paths we get a thread 'main' panicked at 
+    // 'Failed to deserialize module bytecode: PartialVMError { major_status: 
+    // BAD_MAGIC, sub_status: None, message: None, indices: [], offsets: [] }', 
+    // diem-move/diem-framework/src/release.rs:260:53
+
     /// Creates a release bundle from the specified options and saves it to disk. As a side
     /// effect, also generates rust bindings.
     pub fn create_release(self) -> anyhow::Result<()> {

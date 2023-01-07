@@ -17,9 +17,10 @@ use std::{
 
 pub struct AptosValueAnnotator<'a, T>(MoveValueAnnotator<'a, T>);
 
+//////// 0L ////////
 /// A wrapper around `MoveValueAnnotator` that adds a few aptos-specific funtionalities.
 #[derive(Debug)]
-pub struct AnnotatedAccountStateBlob(BTreeMap<StructTag, AnnotatedMoveStruct>);
+pub struct AnnotatedAccountStateBlob(pub BTreeMap<StructTag, AnnotatedMoveStruct>);
 
 impl<'a, T: MoveResolverExt> AptosValueAnnotator<'a, T> {
     pub fn new(storage: &'a T) -> Self {

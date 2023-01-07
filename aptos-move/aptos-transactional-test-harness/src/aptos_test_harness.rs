@@ -160,6 +160,10 @@ struct BlockCommand {
 
     #[structopt(long = "time")]
     time: u64,
+
+    /////// 0L /////////
+    #[structopt(long = "round")]
+    round: u64,    
 }
 
 /// Command to view a table item.
@@ -571,7 +575,19 @@ impl<'a> MoveTestAdapter<'a> for AptosTestAdapter<'a> {
 
         // Genesis modules
         let mut storage = FakeDataStore::new(HashMap::new()).into_move_resolver();
-        storage.add_write_set(GENESIS_CHANGE_SET_HEAD.write_set());
+
+        /////// 0L /////////
+        // storage.add_write_set(GENESIS_CHANGE_SET_HEAD.write_set());
+        let validators = task_opt.as_ref().unwrap().command.1.validators.as_ref();
+        let mut val_size = None;
+        if validators.is_some() { 
+            val_size = Some(validators.as_ref().unwrap().len()) 
+        }
+        storage.add_write_set(
+            generate_genesis_change_set_for_testing_ol(
+                GenesisOptions::Fresh, val_size
+            ).write_set()
+        );
 
         // Builtin private key mapping
         let mut private_key_mapping = BTreeMap::new();
@@ -869,7 +885,7 @@ impl<'a> MoveTestAdapter<'a> for AptosTestAdapter<'a> {
                 let proposer = self.compiled_state().resolve_address(&block_cmd.proposer);
                 let metadata = BlockMetadata::new(
                     HashValue::zero(),
-                    0,
+                    block_cmd.round, /////// 0L /////////
                     block_cmd.time,
                     proposer,
                     vec![],
