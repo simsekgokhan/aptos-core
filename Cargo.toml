@@ -486,34 +486,34 @@ x25519-dalek = "1.2.0"
 
 # Note: the BEGIN and END comments below are required for external tooling. Do not remove.
 # BEGIN MOVE DEPENDENCIES
-move-abigen = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-binary-format = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-bytecode-verifier = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-bytecode-utils = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-cli = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-command-line-common = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-compiler ={ git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-core-types = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082", features = ["address32"] }
-move-docgen = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-ir-compiler = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-model = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-package = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-prover = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-prover-boogie-backend = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-stackless-bytecode = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-prover-test-utils = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-resource-viewer = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-stackless-bytecode-interpreter = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-stdlib = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-symbol-pool = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-table-extension = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-transactional-test-runner = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-move-unit-test = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082", features = ["table-extension"] }
-move-vm-runtime = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082", features = ["lazy_natives"] }
-move-vm-test-utils = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082", features = ["table-extension"] }
-move-vm-types = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-read-write-set = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
-read-write-set-dynamic = { git = "https://github.com/simsekgokhan/move-0L", rev = "ecaf62e6b6826b9ef452773f4251a41e4d6df082" }
+move-abigen = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-binary-format = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-bytecode-verifier = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-bytecode-utils = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-cli = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-command-line-common = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-compiler ={ git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-core-types = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed", features = ["address32"] }
+move-docgen = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-ir-compiler = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-model = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-package = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-prover = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-prover-boogie-backend = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-stackless-bytecode = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-prover-test-utils = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-resource-viewer = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-stackless-bytecode-interpreter = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-stdlib = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-symbol-pool = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-table-extension = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-transactional-test-runner = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+move-unit-test = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed", features = ["table-extension"] }
+move-vm-runtime = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed", features = ["lazy_natives"] }
+move-vm-test-utils = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed", features = ["table-extension"] }
+move-vm-types = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+read-write-set = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
+read-write-set-dynamic = { git = "https://github.com/simsekgokhan/move-0L", rev = "3d218edac2bc983183a86db74e49c35f92b340ed" }
 # END MOVE DEPENDENCIES
 
 [profile.release]

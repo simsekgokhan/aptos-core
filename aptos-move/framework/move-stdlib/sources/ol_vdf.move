@@ -5,7 +5,7 @@
 // alleged_solution is the result of the proof that was run on the user's 
 // computer of type Vec<u8>. (e.g. '005271e8f9ab2eb')
 
-module aptos_framework::vdf {
+module std::ol_vdf {
 
       // verifies a VDF proof with security parameters.
       native public fun verify(

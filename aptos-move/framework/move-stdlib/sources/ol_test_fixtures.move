@@ -4,7 +4,7 @@
 // Collection of vdf proofs for testing.
 /////////////////////////////////////////////////////////////////////////
 
-module aptos_framework::test_fixtures {
+module std::ol_test_fixtures {
 //   use DiemFramework::Testnet;
 //     public fun easy_difficulty(): u64 {
 //       100

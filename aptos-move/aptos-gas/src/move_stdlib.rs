@@ -19,6 +19,13 @@ crate::natives::define_gas_parameters_for_natives!(GasParameters, "move_stdlib",
     [.hash.sha3_256.base, "hash.sha3_256.base", 4000 * MUL],
     [.hash.sha3_256.per_byte, "hash.sha3_256.per_byte", 45 * MUL],
 
+    //////// 0L ////////
+    [.ol_vdf.extract_address_from_challenge.base, 
+        "ol_vdf.extract_address_from_challenge.base", 4000 * MUL],
+    // Todo: do we need this part?
+    // [.ol_vdf.extract_address_from_challenge.per_byte,
+    //     "ol_vdf.extract_address_from_challenge.per_byte", 45 * MUL],
+
     // Note(Gas): this initial value is guesswork.
     [.signer.borrow_address.base, "signer.borrow_address.base", 200 * MUL],
 
@@ -31,4 +38,4 @@ crate::natives::define_gas_parameters_for_natives!(GasParameters, "move_stdlib",
     [.string.index_of.base, "string.index_of.base", 400 * MUL],
     [.string.index_of.per_byte_pattern, "string.index_of.per_byte_pattern", 20 * MUL],
     [.string.index_of.per_byte_searched, "string.index_of.per_byte_searched", 10 * MUL],
-], allow_unmapped = 1 /* bcs */ + 2 /* hash */ + 8 /* vector */ + 2 /* type_name */ + UNIT_TEST_ENTRIES);
+], allow_unmapped = 1 /* bcs */ + 2 /* hash */ + 2 /* ol_vdf */ + 8 /* vector */ + 2 /* type_name */ + UNIT_TEST_ENTRIES);
