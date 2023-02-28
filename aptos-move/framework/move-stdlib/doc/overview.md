@@ -20,6 +20,7 @@ For on overview of the Move language, see the [Move Book][move-book].
 -  [`0x1::features`](features.md#0x1_features)
 -  [`0x1::fixed_point32`](fixed_point32.md#0x1_fixed_point32)
 -  [`0x1::hash`](hash.md#0x1_hash)
+-  [`0x1::ol_debug`](ol_debug.md#0x1_ol_debug)
 -  [`0x1::ol_test_fixtures`](ol_test_fixtures.md#0x1_ol_test_fixtures)
 -  [`0x1::ol_vdf`](ol_vdf.md#0x1_ol_vdf)
 -  [`0x1::option`](option.md#0x1_option)
