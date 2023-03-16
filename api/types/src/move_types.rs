@@ -322,6 +322,8 @@ impl From<TransactionArgument> for MoveValue {
             TransactionArgument::Bool(v) => MoveValue::Bool(v),
             TransactionArgument::Address(v) => MoveValue::Address(v.into()),
             TransactionArgument::U8Vector(bytes) => MoveValue::Bytes(HexEncodedBytes(bytes)),
+            // 0L v7 todo
+            TransactionArgument::AddressVector(_) => todo!(),
         }
     }
 }

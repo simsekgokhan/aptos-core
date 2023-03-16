@@ -20,8 +20,9 @@ crate::natives::define_gas_parameters_for_natives!(GasParameters, "move_stdlib",
     [.hash.sha3_256.per_byte, "hash.sha3_256.per_byte", 45 * MUL],
 
     //////// 0L ////////
-    [.ol_vdf.extract_address_from_challenge.base, 
-        "ol_vdf.extract_address_from_challenge.base", 4000 * MUL],
+    // 0L v7 todo
+    // [.ol_vdf.extract_address_from_challenge.base, 
+    //     "ol_vdf.extract_address_from_challenge.base", 4000 * MUL],
     // Todo: do we need this part?
     // [.ol_vdf.extract_address_from_challenge.per_byte,
     //     "ol_vdf.extract_address_from_challenge.per_byte", 45 * MUL],
